@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'lordsmobile';
+
+  public handleTargetChanged(id: string | null): void {
+    console.log('-----');
+    console.log(id);
+    console.log('-----');
+  }
 }

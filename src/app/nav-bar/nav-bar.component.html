@@ -1,0 +1,18 @@
+<header>
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+    <a class="navbar-brand" href="#">Lords Mobile Helpers</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+            aria-expanded="false" aria-label="Toggle navigation" (click)="collapsed = !collapsed">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" [ngClass]="{show: !collapsed}" id="navbarCollapse">
+      <ul id="main-nav-items" class="navbar-nav mr-auto">
+        <li class="nav-item" *ngFor="let navItem of navItems" [ngClass]="{active: navItem.active}">
+          <a class="nav-link" href="#{{navItem.target}}">
+            {{navItem.title}}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>

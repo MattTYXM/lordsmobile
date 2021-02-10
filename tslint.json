@@ -38,8 +38,8 @@
         "order": [
           "static-field",
           "instance-field",
-          "static-method",
-          "instance-method"
+          "instance-method",
+          "static-method"
         ]
       }
     ],
@@ -108,7 +108,8 @@
       "options": [
         "ban-keywords",
         "check-format",
-        "allow-pascal-case"
+        "require-const-for-all-caps",
+        "allow-leading-underscore"
       ]
     },
     "whitespace": {

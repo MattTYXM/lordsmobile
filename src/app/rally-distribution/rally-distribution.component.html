@@ -1,0 +1,95 @@
+<div class="card">
+
+  <div class="card-body">
+
+    <h1 class="card-title text-center">Rally Distribution</h1>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <form>
+
+            <div class="form-group">
+              <label for="rd-total-input">Total Soldiers</label>
+              <input
+                id="rd-total-input" type="number" class="form-control" [formControl]="total" required
+                (ngModelChange)="calculate()"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="rd-infantry-input">Infantry Percentage</label>
+              <input
+                id="rd-infantry-input" type="number" class="form-control" [formControl]="infantry" required
+                (ngModelChange)="calculate()"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="rd-ranged-input">Ranged Percentage</label>
+              <input
+                id="rd-ranged-input" type="number" class="form-control" [formControl]="ranged" required
+                (ngModelChange)="calculate()"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="rd-cavalry-input">Cavalry Percentage</label>
+              <input
+                id="rd-cavalry-input" type="number" class="form-control" [formControl]="cavalry" required
+                (ngModelChange)="calculate()"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="rd-siege-input">Siege Percentage</label>
+              <input
+                id="rd-siege-input" type="number" class="form-control" [formControl]="siege" required
+                (ngModelChange)="calculate()"
+              />
+            </div>
+
+          </form>
+        </div>
+        <div class="col-sm-6">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Type</th>
+                <th scope="col">Count</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Total Infantry</th>
+                <td>{{formatNumber(rallyDistribution.infantry)}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Total Ranged</th>
+                <td>{{formatNumber(rallyDistribution.ranged)}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Total Cavalry</th>
+                <td>{{formatNumber(rallyDistribution.cavalry)}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Total Siege</th>
+                <td>{{formatNumber(rallyDistribution.siege)}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Used Troops</th>
+                <td>{{formatNumber(rallyDistribution.total)}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Unused Troops</th>
+                <td>{{formatNumber(rallyDistribution.remainder)}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
