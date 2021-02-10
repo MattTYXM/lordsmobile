@@ -7,9 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  public handleTargetChanged(id: string | null): void {
-    console.log('-----');
-    console.log(id);
-    console.log('-----');
+  public navItemId = 'home';
+
+  constructor() {
   }
 }

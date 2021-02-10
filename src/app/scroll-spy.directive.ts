@@ -1,22 +1,18 @@
-import { AfterContentInit, ContentChildren, Directive, ElementRef, EventEmitter, HostListener, Output, QueryList } from '@angular/core';
-import { ScrollSpyTargetDirective } from './scroll-spy-target.directive';
-import { ElementService } from './element/element.service';
+import { ContentChildren, Directive, EventEmitter, HostListener, Output, QueryList } from '@angular/core';
 import { ElementMetadata } from './element/element-metadata.model';
+import { ElementService } from './element/element.service';
+import { ScrollSpyTargetDirective } from './scroll-spy-target.directive';
 
 @Directive({
   selector: '[appScrollSpy]'
 })
-export class ScrollSpyDirective implements AfterContentInit {
+export class ScrollSpyDirective {
 
-  @ContentChildren(ScrollSpyTargetDirective, {descendants: true}) public targets!: QueryList<ScrollSpyTargetDirective>;
-  @Output() public targetChanged = new EventEmitter<string | null>();
+  @ContentChildren(ScrollSpyTargetDirective, { descendants: true }) public targets!: QueryList<ScrollSpyTargetDirective>;
+  @Output() public targetChanged: EventEmitter<string> = new EventEmitter<string>();
   private _selected?: ScrollSpyTargetDirective | null = null;
 
-  constructor(private _element: ElementRef, private _elementService: ElementService) {
-  }
-
-  ngAfterContentInit(): void {
-    this._update();
+  constructor(private _elementService: ElementService) {
   }
 
   @HostListener('window:scroll')
@@ -40,9 +36,9 @@ export class ScrollSpyDirective implements AfterContentInit {
       selected = null;
     }
 
-    if (this._selected !== selected) {
+    if (this._selected?.id !== selected?.id) {
       this._selected = selected;
-      this.targetChanged.emit(this._selected?.id || null);
+      this.targetChanged.emit(this._selected?.id || '');
     }
   }
 }

@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse" [ngClass]="{show: !collapsed}" id="navbarCollapse">
       <ul id="main-nav-items" class="navbar-nav mr-auto">
         <li class="nav-item" *ngFor="let navItem of navItems" [ngClass]="{active: navItem.active}">
-          <a class="nav-link" href="#{{navItem.target}}">
+          <a class="nav-link" (click)="scrollTo(navItem.target)" [ngStyle]="{cursor: 'pointer'}">
             {{navItem.title}}
           </a>
         </li>

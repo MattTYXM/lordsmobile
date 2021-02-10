@@ -1,30 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { NavItemModel } from './nav-item.model';
-import { LocationStrategy } from '@angular/common';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss']
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent implements AfterViewInit, OnChanges {
 
+  @Input() public navItemId!: string;
   public collapsed = true;
   public navItems: NavItemModel[] = [
     new NavItemModel('Home', 'home', false),
     new NavItemModel('Rally Distribution', 'rally-distribution', false)
   ];
 
-  constructor(private _locationStrategy: LocationStrategy) {
+  ngAfterViewInit(): void {
+    this._updateNavItems();
   }
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.navItemId.previousValue !== changes.navItemId.currentValue) {
+      this._updateNavItems();
+    }
+  }
+
+  public scrollTo(id: string): void {
+    const element = document.getElementById(id);
+
+    if (element) {
+      window.scrollTo({ top: element.getBoundingClientRect().top - 60 });
+    }
+  }
+
+  private _updateNavItems(): void {
     this.navItems.forEach(navItem => navItem.active = this._isActive(navItem));
   }
 
   private _isActive(navItem: NavItemModel): boolean {
-    const currentPath: string = this._locationStrategy.path(true).split('?')[0];
-
-    return currentPath.endsWith(`#${navItem.target}`);
+    return navItem.target === this.navItemId;
   }
 }

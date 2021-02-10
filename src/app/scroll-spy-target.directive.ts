@@ -22,7 +22,11 @@ export class ScrollSpyTargetDirective implements AfterContentInit {
 
   public update(parentMetadata: ElementMetadata): void {
     this._elementMetadata = this._elementService.getMetadata(this._el);
-    this._inViewPort = (this._elementMetadata.top >= parentMetadata.top && this._elementMetadata.top < parentMetadata.bottom);
+    this._inViewPort = (
+      this._isTopIn(parentMetadata) ||
+      this._isBottomIn(parentMetadata) ||
+      this._isOverlapping(parentMetadata)
+    );
   }
 
   public get inViewPort(): boolean {
@@ -31,5 +35,17 @@ export class ScrollSpyTargetDirective implements AfterContentInit {
 
   public get elementMetadata(): ElementMetadata {
     return this._elementMetadata;
+  }
+
+  private _isTopIn(parentMetadata: ElementMetadata): boolean {
+    return parentMetadata.top <= this._elementMetadata.top;
+  }
+
+  private _isBottomIn(parentMetadata: ElementMetadata): boolean {
+    return parentMetadata.bottom >= this._elementMetadata.bottom;
+  }
+
+  private _isOverlapping(parentMetadata: ElementMetadata): boolean {
+    return this._elementMetadata.top < parentMetadata.top && this._elementMetadata.bottom > parentMetadata.bottom;
   }
 }

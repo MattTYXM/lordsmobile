@@ -1,15 +1,19 @@
-<app-nav-bar></app-nav-bar>
+<app-nav-bar [navItemId]="navItemId"></app-nav-bar>
 
-<main role="main" class="container" appScrollSpy (targetChanged)="handleTargetChanged($event)">
-  <div class="row">
+<main role="main" class="container" appScrollSpy (targetChanged)="navItemId = $event">
+  
+  <div class="row" appScrollSpyTarget id="home">
     <div class="col-sm-12">
-      <app-home appScrollSpyTarget id="home"></app-home>
+      <app-home></app-home>
     </div>
   </div>
-  <div class="row">
+  
+  <div class="row" appScrollSpyTarget id="rally-distribution">
     <div class="col-sm-12">
-      <app-rally-distribution appScrollSpyTarget id="rally-distribution"></app-rally-distribution>
+      <app-rally-distribution></app-rally-distribution>
     </div>
   </div>
+
 </main>
+
 <app-footer></app-footer>
